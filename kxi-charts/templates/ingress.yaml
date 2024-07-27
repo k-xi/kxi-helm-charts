@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "kxi-helm-charts.fullname" . }}
+  labels:
+    app: {{ include "kxi-helm-charts.name" . }}
+spec:
+  rules:
+    - host: your-domain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "kxi-helm-charts.fullname" . }}
+                port:
+                  number: 8080
